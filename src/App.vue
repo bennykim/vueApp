@@ -1,33 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld />
+      <Colors />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Colors from './components/Colors.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Colors
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 
-  img{
-      width: 300px;
-      height: 300px;
-  }
+    #app{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-width: 500px;
+        min-height: 500px;
+        overflow: auto;
+    }
 }
 </style>
