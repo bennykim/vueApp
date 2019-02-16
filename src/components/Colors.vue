@@ -2,19 +2,18 @@
 <div class="colors">
     <h2>Vue</h2>
 
-    <ul v-if="isColorList" class="color-list">
+    <ul v-if="!isEmpty" class="color-list">
         <li class="color-txt" v-for="(color, idx) in colorList">
             {{color}}
             <button type="button" name="button" @click="deleteColor(idx)">-</button>
         </li>
     </ul>
 
-    <div v-if="isMaxList" class="add-color">
+    <div v-if="!isMax" class="add-color">
         <input
             ref="input"
             type="text"
             name="inputColor"
-            value="item"
             maxlength="15"
             placeholder="Please enter a color"
             v-model="color"
@@ -37,25 +36,25 @@ export default {
         }
     },
     computed: {
-        isColorList() {
-            return this.colorList.length > 0
+        isEmpty() {
+            return this.colorList.length === 0
         },
-        isMaxList() {
-            return this.colorList.length <= 4
+        isMax() {
+            return this.colorList.length > 4
+        }
+    },
+    methods: {
+        addColor() {
+            if (this.color === '') return
+            this.colorList = this.colorList.concat(this.color)
+            this.color = ''
+        },
+        deleteColor(idx) {
+            this.colorList = this.colorList.filter((color, i) => i !== idx)
         }
     },
     mounted() {
         this.$refs.input.focus()
-    },
-    methods: {
-        addColor() {
-            if (this.color === '') return false
-            this.colorList.push(this.color)
-            this.color = ''
-        },
-        deleteColor(idx) {
-            this.colorList.splice(idx, 1)
-        }
     }
 }
 </script>
