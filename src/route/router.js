@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Index from '@/components/Index'
 import Todo from '@/components/Todo'
+import Grid from '@/components/Grid'
 
 Vue.use(Router)
 
@@ -11,9 +12,13 @@ const router = new Router({
     routes: [{
         path: '/',
         component: Index,
+        redirect: '/todo',
         children: [{
             path: 'todo',
             component: Todo
+        }, {
+            path: 'grid',
+            component: Grid
         }]
     }]
 })

@@ -16,6 +16,9 @@
                 list: [{
                     path: '/todo',
                     name: 'Todo'
+                }, {
+                    path: '/grid',
+                    name: 'Grid'
                 }]
             }
         }
