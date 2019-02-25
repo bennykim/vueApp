@@ -19,6 +19,9 @@
                 }, {
                     path: '/grid',
                     name: 'Grid'
+                }, {
+                    path: '/modals',
+                    name: 'Modals'
                 }]
             }
         }

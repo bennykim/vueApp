@@ -110,6 +110,7 @@
             height: 24px;
             outline: none;
             margin: 12px 0;
+            padding-left: 10px;
         }
 
         table {
