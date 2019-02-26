@@ -5,6 +5,7 @@ import Index from '@/components/Index'
 import Todo from '@/components/Todo'
 import Grid from '@/components/Grid'
 import Modals from '@/components/Modals'
+import Counter from '@/components/Counter'
 
 Vue.use(Router)
 
@@ -26,6 +27,10 @@ const router = new Router({
             name: 'modals',
             path: 'modals',
             component: Modals
+        }, {
+            name: 'counter',
+            path: 'counter',
+            component: Counter
         }]
     }]
 })

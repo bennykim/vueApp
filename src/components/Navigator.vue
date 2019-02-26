@@ -22,6 +22,9 @@
                 }, {
                     path: '/modals',
                     name: 'Modals'
+                }, {
+                    path: '/counter',
+                    name: 'Counter'
                 }]
             }
         }
