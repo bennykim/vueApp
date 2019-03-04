@@ -11,21 +11,17 @@
 <script>
     export default {
         name: 'Navigator',
-        data() {
-            return {
-                list: [{
-                    path: '/todo',
-                    name: 'Todo'
-                }, {
-                    path: '/grid',
-                    name: 'Grid'
-                }, {
-                    path: '/modals',
-                    name: 'Modals'
-                }, {
-                    path: '/counter',
-                    name: 'Counter'
-                }]
+        computed: {
+            list() {
+                const routes = this.$router.options.routes[0].children
+                return routes.map((route) => {
+                    let path = route.path
+                    let name = route.name
+                    return {
+                        path: `/${path}`,
+                        name: name.charAt(0).toUpperCase() + name.slice(1)
+                    }
+                })
             }
         }
     }

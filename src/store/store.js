@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -8,6 +9,11 @@ const store = new Vuex.Store({
         count: {
             title: '',
             value: 0
+        }
+    },
+    getters: {
+        getCount(state) {
+            return state.count
         }
     },
     mutations: {
@@ -20,9 +26,19 @@ const store = new Vuex.Store({
             state.count.value -= 1
         }
     },
-    getters: {
-        getCount(state) {
-            return state.count
+    actions: {
+        async getWeatherData(ctx, payload) {
+            const baseURL = 'https://abnormal-weather-api.herokuapp.com'
+            try {
+                let result = await axios.get(`${baseURL}/cities/search`, {
+                    params: {
+                        city: payload
+                    }
+                })
+                if (result.status === 200) return result
+            } catch (err) {
+                console.log(`Error ${err}`)
+            }
         }
     }
 })

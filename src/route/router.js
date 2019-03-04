@@ -6,6 +6,7 @@ import Todo from '@/components/Todo'
 import Grid from '@/components/Grid'
 import Modals from '@/components/Modals'
 import Counter from '@/components/Counter'
+import Async from '@/components/Async'
 
 Vue.use(Router)
 
@@ -31,6 +32,10 @@ const router = new Router({
             name: 'counter',
             path: 'counter',
             component: Counter
+        }, {
+            name: 'async',
+            path: 'async',
+            component: Async
         }]
     }]
 })
