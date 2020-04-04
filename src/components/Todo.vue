@@ -1,60 +1,88 @@
 <template>
-    <div class="todo">
-        <h2>Todo</h2>
+  <div class="todo">
+    <h2>Todo</h2>
 
-        <ul v-if="!isEmpty" class="todo-list">
-            <li class="todo-txt" v-for="(todo, idx) in todoList">
-                {{todo}}
-                <button type="button" name="button" @click="deleteTodo(idx)">-</button>
-            </li>
-        </ul>
+    <ul
+      v-if="!isEmpty"
+      class="todo-list"
+    >
+      <li
+        class="todo-txt"
+        v-for="(item, idx) in todoList"
+        :key="idx"
+      >
+        {{ item }}
+        <button
+          type="button"
+          name="button"
+          @click="deleteTodo(idx)"
+        >
+          -
+        </button>
+      </li>
+    </ul>
 
-        <div v-if="!isMax" class="add-todo">
-            <input
-                ref="input"
-                type="text"
-                name="inputColor"
-                maxlength="15"
-                placeholder="What needs to be done?"
-                v-model="todo"
-                @keyup.enter="addTodo()" />
-            <button type="button" name="button" @click="addTodo()">+</button>
-        </div>
-        <p v-else class="msg">The list is full.</p>
+    <div
+      v-if="!isMax"
+      class="add-todo"
+    >
+      <input
+        ref="input"
+        type="text"
+        name="inputColor"
+        maxlength="15"
+        placeholder="What needs to be done?"
+        v-model="todo"
+        @keyup.enter="addTodo()"
+      >
+      <button
+        type="button"
+        name="button"
+        @click="addTodo()"
+      >
+        +
+      </button>
     </div>
+    <p
+      v-else
+      class="msg"
+    >
+      The list is full.
+    </p>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'Todo',
-        data() {
-            return {
-                todo: '',
-                todoList: []
-            }
-        },
-        computed: {
-            isEmpty() {
-                return this.todoList.length === 0
-            },
-            isMax() {
-                return this.todoList.length > 4
-            }
-        },
-        methods: {
-            addTodo() {
-                if (this.todo === '') return
-                this.todoList = this.todoList.concat(this.todo)
-                this.todo = ''
-            },
-            deleteTodo(idx) {
-                this.todoList = this.todoList.filter((item, i) => i !== idx)
-            }
-        },
-        mounted() {
-            this.$refs.input.focus()
-        }
+export default {
+  name: 'Todo',
+  data() {
+    return {
+      todo: '',
+      todoList: []
+    };
+  },
+  computed: {
+    isEmpty() {
+      return this.todoList.length === 0;
+    },
+    isMax() {
+      return this.todoList.length > 4;
     }
+  },
+  methods: {
+    addTodo() {
+      if (this.todo === '') return;
+      this.todoList = this.todoList.concat(this.todo);
+      this.todo = '';
+    },
+    deleteTodo(idx) {
+      this.todoList = this.todoList.filter((item, i) => i !== idx);
+    }
+  },
+  mounted() {
+    this.$refs.input.focus();
+  }
+};
 </script>
 
 <style lang="scss" scoped>

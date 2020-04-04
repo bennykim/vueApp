@@ -1,97 +1,116 @@
 <template lang="html">
-    <div class="grid">
-        <h2>Grid</h2>
+  <div class="grid">
+    <h2>Grid</h2>
 
-        <input
-            type="text"
-            name="search"
-            value=""
-            maxlength="10"
-            placeholder="Please enter keywords"
-            v-model="searchKey" />
+    <input
+      type="text"
+      name="search"
+      value=""
+      maxlength="10"
+      placeholder="Please enter keywords"
+      v-model="searchKey"
+    >
 
-        <table>
-            <thead>
-                <tr class="thead-tr">
-                    <th v-for="key in gridColumns" :class="{'active': sortKey === key}">
-                        {{key}}
-                        <span
-                            class="arrow"
-                            :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"
-                            @click="sortBy(key)"></span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in filterData">
-                    <th v-for="key in gridColumns" :class="{'active': sortKey === key}">{{item[key]}}</th>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <table>
+      <thead>
+        <tr class="thead-tr">
+          <th
+            v-for="key in gridColumns"
+            :key="key"
+            :class="{'active': sortKey === key}"
+          >
+            {{ key }}
+            <span
+              class="arrow"
+              :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"
+              @click="sortBy(key)"
+            />
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr 
+          v-for="(item, i) in filterData"
+          :key="i"
+        >
+          <th
+            v-for="(key, j) in gridColumns"
+            :key="j"
+            :class="{'active': sortKey === key}"
+          >
+            {{ item[key] }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'Grid',
-        data() {
-            return {
-                sortKey: '',
-                searchKey: '',
-                sortOrders: {},
-                gridColumns: ['name', 'age', 'weight'],
-                gridData: [{
-                    name: 'Jack', age: 20, weight: 70
-                }, {
-                    name: 'Lee', age: 30, weight: 88
-                }, {
-                    name: 'Chuck', age: 17, weight: 75
-                }, {
-                    name: 'Ralph', age: 41, weight: 69
-                }, {
-                    name: 'Mark', age: 25, weight: 80
-                }]
-            }
-        },
-        computed: {
-            filterData() {
-                let data = this.gridData
-                let sortKey = this.sortKey
-                let searchKey = this.searchKey
-                let order = this.sortOrders[sortKey] || 1
-
-                if (searchKey) {
-                    data = data.filter((row) => {
-                        return Object.keys(row).some((key) => {
-                           return String(row[key]).toLowerCase().indexOf(searchKey) > -1
-                        })
-                    })
-                }
-                if (sortKey) {
-                    data = data.sort((a, b) => {
-                        a = a[sortKey]
-                        b = b[sortKey]
-                        return (a === b ? 0 : a > b ? 1 : -1) * order
-                    })
-                }
-
-                return data
-            }
-        },
-        mounted() {
-            let sortOrders = {}
-            this.gridColumns.forEach((key) => {
-                sortOrders[key] = 1
-            })
-            this.sortOrders = sortOrders
-        },
-        methods: {
-            sortBy(key) {
-                this.sortKey = key
-                this.sortOrders[key] = this.sortOrders[key] * -1
-            }
+export default {
+  name: 'Grid',
+  data() {
+    return {
+      sortKey: '',
+      searchKey: '',
+      sortOrders: {},
+      gridColumns: [
+        'name', 'age', 'weight'
+      ],
+      gridData: [
+        {
+          name: 'Jack', age: 20, weight: 70
+        }, {
+          name: 'Lee', age: 30, weight: 88
+        }, {
+          name: 'Chuck', age: 17, weight: 75
+        }, {
+          name: 'Ralph', age: 41, weight: 69
+        }, {
+          name: 'Mark', age: 25, weight: 80
         }
+      ]
+    };
+  },
+  computed: {
+    filterData() {
+      let data = this.gridData;
+      let sortKey = this.sortKey;
+      let searchKey = this.searchKey;
+      let order = this.sortOrders[sortKey] || 1;
+
+      if (searchKey) {
+        data = data.filter((row) => {
+          return Object.keys(row).some((key) => {
+            return String(row[key]).toLowerCase().indexOf(searchKey) > -1;
+          });
+        });
+      }
+      if (sortKey) {
+        data = data.sort((a, b) => {
+          a = a[sortKey];
+          b = b[sortKey];
+          return (a === b ? 0 : a > b ? 1 : -1) * order;
+        });
+      }
+
+      return data;
     }
+  },
+  mounted() {
+    let sortOrders = {};
+    this.gridColumns.forEach((key) => {
+      sortOrders[key] = 1;
+    });
+    this.sortOrders = sortOrders;
+  },
+  methods: {
+    sortBy(key) {
+      this.sortKey = key;
+      this.sortOrders[key] = this.sortOrders[key] * -1;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

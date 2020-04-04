@@ -1,30 +1,35 @@
 <template lang="html">
-    <div class="navigator">
-        <ul>
-            <li v-for="item in list">
-                <router-link :to="item.path">{{item.name}}</router-link>
-            </li>
-        </ul>
-    </div>
+  <div class="navigator">
+    <ul>
+      <li 
+        v-for="(item, i) in list"
+        :key="i"
+      >
+        <router-link :to="item.path">
+          {{ item.name }}
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'Navigator',
-        computed: {
-            list() {
-                const routes = this.$router.options.routes[0].children
-                return routes.map((route) => {
-                    let path = route.path
-                    let name = route.name
-                    return {
-                        path: `/${path}`,
-                        name: name.charAt(0).toUpperCase() + name.slice(1)
-                    }
-                })
-            }
-        }
+export default {
+  name: 'Navigator',
+  computed: {
+    list() {
+      const routes = this.$router.options.routes[0].children;
+      return routes.map((route) => {
+        let path = route.path;
+        let name = route.name;
+        return {
+          path: `/${path}`,
+          name: name.charAt(0).toUpperCase() + name.slice(1)
+        };
+      });
     }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

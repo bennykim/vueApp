@@ -1,30 +1,42 @@
 <template lang="html">
-    <div class="modals">
-        <h2>Modals</h2>
+  <div class="modals">
+    <h2>Modals</h2>
 
-        <button class="button-show-modal" @click="isModal=true">Show Modal</button>
+    <button
+      class="button-show-modal"
+      @click="isModal=true"
+    >
+      Show Modal
+    </button>
 
-        <Modal v-if="isModal" :close.sync="isModal">
-            <h3 slot="header">Modal Header</h3>
-            <p slot="body">Modal Body</p>
-        </Modal>
-    </div>
+    <Modal
+      v-if="isModal"
+      :close.sync="isModal"
+    >
+      <h3 slot="header">
+        Modal Header
+      </h3>
+      <p slot="body">
+        Modal Body
+      </p>
+    </Modal>
+  </div>
 </template>
 
 <script>
-    import Modal from './Modal'
+import Modal from './Modal';
 
-    export default {
-        name: 'Modals',
-        data() {
-            return {
-                isModal: false
-            }
-        },
-        components: {
-            Modal
-        }
-    }
+export default {
+  name: 'Modals',
+  data() {
+    return {
+      isModal: false
+    };
+  },
+  components: {
+    Modal
+  }
+};
 </script>
 
 <style lang="scss" scoped>

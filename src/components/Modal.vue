@@ -1,28 +1,30 @@
 <template lang="html">
-    <transition name="modal">
-        <div class="modal">
-            <div class="modal-mask">
-                <div class="modal-wrapper">
-                  <div class="modal-container">
-                      <slot name="header"></slot>
-                      <slot name="body"></slot>
-                      <button @click="closeModal()">OK</button>
-                  </div>
-                </div>
-            </div>
+  <transition name="modal">
+    <div class="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+            <slot name="header" />
+            <slot name="body" />
+            <button @click="closeModal()">
+              OK
+            </button>
+          </div>
         </div>
-    </transition>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
-    export default {
-        name: 'modal',
-        methods: {
-            closeModal() {
-                this.$emit('update:close', false)
-            }
-        }
+export default {
+  name: 'Modal',
+  methods: {
+    closeModal() {
+      this.$emit('update:close', false);
     }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

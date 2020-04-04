@@ -1,20 +1,24 @@
 <template lang="html">
-    <div class="index">
-        <Navigator />
-        <router-view />
-        <img class="logo" src="@/assets/logo.png" alt="Vue logo" />
-    </div>
+  <div class="index">
+    <Navigator />
+    <router-view />
+    <img
+      class="logo"
+      src="@/assets/logo.png"
+      alt="Vue logo"
+    >
+  </div>
 </template>
 
 <script>
-    import Navigator from '@/components/Navigator'
+import Navigator from '@/components/Navigator';
 
-    export default {
-        name: 'Index',
-        components: {
-            Navigator
-        }
-    }
+export default {
+  name: 'Index',
+  components: {
+    Navigator
+  }
+};
 </script>
 
 <style lang="scss" scoped>
